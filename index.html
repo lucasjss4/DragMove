@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image Compare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="fundo">
+        <input type="text" class="splitter" draggable="true" id="splitter" disabled>
+        <img src="before.jpg" id="car1">
+        <img src="after.jpg">
+    </div>
+</body>
+
+<script>
+
+    const splitter = document.getElementById("splitter");
+    const container = document.querySelector('.fundo');
+    const car = document.getElementById('car1');
+
+    const splitterWidth = 65;
+
+    splitter.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', ''); // Necessário para drag
+    });
+
+    container.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Permite o drop
+    });
+
+    container.addEventListener('drag', (e) => {
+
+        //Pega o tamanho do carro
+        const rect = car.getBoundingClientRect();
+        //Pega o tamanho do container
+        const rect2 = container.getBoundingClientRect();
+        // Posição relativa ao carr
+        let offsetX = e.clientX - rect.left;
+        // Posição relativa ao container
+        let offsetX2 = e.clientX - rect2.left;
+        // Limitar entre 0 e a largura do carro
+        offsetX = Math.max(0, Math.min(offsetX, rect.width));
+        // Limitar entre 0 e a largura do container
+        offsetX2 = Math.max(0, Math.min(offsetX2, rect2.width));
+
+        // Atualiza a posição do splitter em relação ao container
+        splitter.style.left = `${offsetX2 + 6}px`;
+
+        // Calcula a porcentagem para o clip-path em relação ao carro
+        const percentage = (offsetX / rect.width) * 100;
+        car.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+    });
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,43 @@
+body{
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.fundo{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fundo img{
+    height: 431px;   
+}
+
+.fundo #car1{
+    position: absolute;
+    clip-path: inset(0 50% 0 0);
+}
+
+.splitter{
+    position: absolute;
+    width: 65px; /* Largura do splitter */
+    background: url("./splitter.svg") no-repeat center; /* Use a imagem do splitter */
+    background-size: cover; /* Ajusta o tamanho do background */
+    cursor: grabbing;
+    z-index: 10;
+    height: 100%;
+    left: 51%;
+    transform: translateX(-51%);
+    border: none; /* Remove bordas padrão */
+    opacity: 1; /* Oculta o input, se necessário */
+}
+
+input:focus{
+    outline: none;
+}
